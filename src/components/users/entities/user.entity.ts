@@ -11,7 +11,7 @@ export class User {
     @Column({unique: true})
     phone_number: string;
 
-    @Column()
+    @Column()//role enum(vendor,customer,admin) later
     role: string;
 
     @Column ({

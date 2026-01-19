@@ -4,10 +4,10 @@ export class Chat {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
+    @Column()// to be an enum(direct,group)
     chat_type: string;
 
-    @Column()
+    @Column() //(FK -> user.id)
     created_by: string;
 
     @Column({
