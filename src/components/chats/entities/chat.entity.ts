@@ -7,7 +7,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 @Entity("Chat")
 export class Chat {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()// to be an enum(direct,group)
     chat_type: string;

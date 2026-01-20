@@ -4,7 +4,7 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "ty
 @Entity("Receipt")
 export class Receipt {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @OneToOne(() => Transaction, transaction => transaction.receipt)
     @JoinColumn({ name: "transaction_id" })

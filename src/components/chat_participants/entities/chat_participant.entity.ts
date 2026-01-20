@@ -9,7 +9,7 @@ export class ChatParticipant {
 
     @ManyToOne(() => Chat, chat => chat.participants)
     @JoinColumn({ name: "chat_id" })
-    chat_id: string;
+    chat_id: Chat;
 
     @Column({ type: "timestamp",
         default: () => 'CURRENT_TIMESTAMP'

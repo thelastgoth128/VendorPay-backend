@@ -6,7 +6,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn
 @Entity("Transaction")
 export class Transaction {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @Column()
     amount: number;
