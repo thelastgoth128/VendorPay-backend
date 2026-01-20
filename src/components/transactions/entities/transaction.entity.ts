@@ -1,6 +1,7 @@
 import { Chat } from "src/components/chats/entities/chat.entity";
+import { Receipt } from "src/components/receipts/entities/receipt.entity";
 import { User } from "src/components/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Transaction")
 export class Transaction {
@@ -38,4 +39,8 @@ export class Transaction {
     @ManyToOne(() => User, user => user.received_transactions)
     @JoinColumn({ name: "receiver_id" })
     receiver_id: User;
+
+    @OneToOne(() => Receipt, receipt => receipt.transaction)
+    receipt: Receipt;
+
 }
