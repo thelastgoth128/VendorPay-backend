@@ -1,3 +1,4 @@
+import { ChatParticipant } from "src/components/chat_participants/entities/chat_participant.entity";
 import { Chat } from "src/components/chats/entities/chat.entity";
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -27,4 +28,7 @@ export class User {
 
     @OneToMany(()=>Chat,chats=>chats.created_by)
     chats: Chat[];
+
+    @OneToMany(()=>ChatParticipant,chatParticipants=>chatParticipants.user_id)
+    chatParticipants: ChatParticipant[];
 }
