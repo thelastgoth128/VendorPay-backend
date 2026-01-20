@@ -1,3 +1,4 @@
+import { ChatParticipant } from "src/components/chat_participants/entities/chat_participant.entity";
 import { User } from "src/components/users/entities/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -18,4 +19,7 @@ export class Chat {
         default: () => "CURRENT_TIMESTAMP"
     })
     created_at: Date
+
+    @OneToMany(() => ChatParticipant, chatParticipant => chatParticipant.chat_id)
+    participants: ChatParticipant[];
 }
