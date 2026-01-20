@@ -1,5 +1,6 @@
 import { ChatParticipant } from "src/components/chat_participants/entities/chat_participant.entity";
 import { Chat } from "src/components/chats/entities/chat.entity";
+import { Message } from "src/components/messages/entities/message.entity";
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('User')
@@ -31,4 +32,7 @@ export class User {
 
     @OneToMany(()=>ChatParticipant,chatParticipants=>chatParticipants.user_id)
     chatParticipants: ChatParticipant[];
+
+    @OneToMany(() => Message, message => message.sender_id)
+    messages: Message[];
 }

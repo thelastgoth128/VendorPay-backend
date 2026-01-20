@@ -1,4 +1,5 @@
 import { Chat } from "src/components/chats/entities/chat.entity";
+import { User } from "src/components/users/entities/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Message")
@@ -8,10 +9,11 @@ export class Message {
 
     @ManyToOne(() => Chat, chat => chat.messages)
     @JoinColumn({ name: "chat_id" })
-    chat_id: string;
+    chat_id: Chat;
 
-    @Column()
-    sender_id: string; //(FK -> user.id)
+    @ManyToOne(() => User, user => user.messages)
+    @JoinColumn({ name: "sender_id" })
+    sender_id: User;
 
     @Column()
     message_type: string; // to be an enum(text,transaction,receipt)
