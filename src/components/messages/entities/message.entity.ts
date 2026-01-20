@@ -1,12 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Chat } from "src/components/chats/entities/chat.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Message")
 export class Message {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column()
-    chat_id: string; //(FK -> chat.id)
+    @ManyToOne(() => Chat, chat => chat.messages)
+    @JoinColumn({ name: "chat_id" })
+    chat_id: string;
 
     @Column()
     sender_id: string; //(FK -> user.id)
