@@ -1,18 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Chat } from "src/components/chats/entities/chat.entity";
+import { User } from "src/components/users/entities/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Transaction")
 export class Transaction {
     @PrimaryGeneratedColumn()
     id: string;
-
-    @Column()
-    chat_id: string;
-
-    @Column()
-    sender_id: string;
-
-    @Column()
-    receiver_id: string;
 
     @Column()
     amount: number;
@@ -33,5 +26,16 @@ export class Transaction {
         default: () => "CURRENT_TIMESTAMP"
      })
     created_at: Date
-    
+
+    @ManyToOne(() => Chat, chat => chat.transactions)
+    @JoinColumn({ name: "chat_id" })
+    chat_id: Chat;
+
+    @ManyToOne(() => User, user => user.transactions)
+    @JoinColumn({ name: "sender_id" })
+    sender_id: User;
+
+    @ManyToOne(() => User, user => user.received_transactions)
+    @JoinColumn({ name: "receiver_id" })
+    receiver_id: User;
 }
