@@ -7,9 +7,10 @@ import { ChatParticipantsModule } from './components/chat_participants/chat_part
 import { MessagesModule } from './components/messages/messages.module';
 import { TransactionsModule } from './components/transactions/transactions.module';
 import { ReceiptsModule } from './components/receipts/receipts.module';
+import { AuthModule } from './components/auth/auth.module';
 
 @Module({
-  imports: [UsersModule, ChatsModule, ChatParticipantsModule, MessagesModule, TransactionsModule, ReceiptsModule],
+  imports: [UsersModule, ChatsModule, ChatParticipantsModule, MessagesModule, TransactionsModule, ReceiptsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
