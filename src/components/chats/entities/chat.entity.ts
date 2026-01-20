@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/components/users/entities/user.entity";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("Chat")
 export class Chat {
@@ -8,8 +9,9 @@ export class Chat {
     @Column()// to be an enum(direct,group)
     chat_type: string;
 
-    @Column() //(FK -> user.id)
-    created_by: string;
+    @ManyToOne(() => User, user => user.chats)
+    @JoinColumn({ name: "created_by" })
+    created_by: User;
 
     @Column({
         type: "timestamp",

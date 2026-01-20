@@ -1,4 +1,5 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Chat } from "src/components/chats/entities/chat.entity";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('User')
 export class User {
@@ -23,4 +24,7 @@ export class User {
         type: "timestamp",
     })
     updated_at: Date;
+
+    @OneToMany(()=>Chat,chats=>chats.created_by)
+    chats: Chat[];
 }
