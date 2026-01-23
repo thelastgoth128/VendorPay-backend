@@ -5,7 +5,7 @@ import { UpdateReceiptDto } from './dto/update-receipt.dto';
 
 @Controller('receipts')
 export class ReceiptsController {
-  constructor(private readonly receiptsService: ReceiptsService) {}
+  constructor(private readonly receiptsService: ReceiptsService) { }
 
   @Post()
   create(@Body() createReceiptDto: CreateReceiptDto) {
