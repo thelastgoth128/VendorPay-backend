@@ -7,5 +7,5 @@ export class CreateReceiptDto {
 
     @IsNotEmpty()
     @IsNumber()
-    transaction: number;
+    transaction_id: number;
 }
