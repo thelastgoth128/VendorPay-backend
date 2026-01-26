@@ -12,21 +12,21 @@ export class TransactionsService {
     private transactionsRepository: Repository<Transaction>,
   ) { }
 
-  create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
+  create(createTransactionDto: CreateTransactionDto) {
     const transaction = this.transactionsRepository.create({
       ...createTransactionDto,
-      sender: { id: createTransactionDto.senderId },
-      receiver: { id: createTransactionDto.receiverId },
+      sender_id: { id: createTransactionDto.sender_id },
+      receiver_id: { id: createTransactionDto.receiver_id },
     });
     return this.transactionsRepository.save(transaction);
   }
 
   findAll(): Promise<Transaction[]> {
-    return this.transactionsRepository.find({ relations: ['sender', 'receiver'] });
+    return this.transactionsRepository.find({ relations: ['sender_id', 'receiver_id '] });
   }
 
   findOne(id: number): Promise<Transaction | null> {
-    return this.transactionsRepository.findOne({ where: { id }, relations: ['sender', 'receiver'] });
+    return this.transactionsRepository.findOne({ where: { id }, relations: ['sender_id', 'receiver_id'] });
   }
 
   async update(id: number, updateTransactionDto: UpdateTransactionDto): Promise<Transaction | null> {
