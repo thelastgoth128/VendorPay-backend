@@ -11,9 +11,9 @@ export class CreateTransactionDto {
 
     @IsNotEmpty()
     @IsNumber()
-    senderId: number;
+    sender_id: number;
 
     @IsNotEmpty()
     @IsNumber()
-    receiverId: number;
+    receiver_id: number;
 }
