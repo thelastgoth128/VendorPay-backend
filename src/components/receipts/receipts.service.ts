@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateReceiptDto } from './dto/create-receipt.dto';
@@ -15,7 +15,7 @@ export class ReceiptsService {
   create(createReceiptDto: CreateReceiptDto): Promise<Receipt> {
     const receipt = this.receiptsRepository.create({
       ...createReceiptDto,
-      transaction: { id: createReceiptDto.transactionId },
+      transaction: { id: createReceiptDto.transaction_id },
     });
     return this.receiptsRepository.save(receipt);
   }
@@ -29,8 +29,13 @@ export class ReceiptsService {
   }
 
   async update(id: number, updateReceiptDto: UpdateReceiptDto): Promise<Receipt | null> {
-    await this.receiptsRepository.update(id, updateReceiptDto);
-    return this.findOne(id);
+    const receipt = await this.receiptsRepository.findOne({where: {id: id}})
+    if (!receipt) {
+      throw new NotFoundException("Receipt not found")
+    }
+
+    Object.assign(receipt, updateReceiptDto);
+    return await this.receiptsRepository.save(receipt);
   }
 
   async remove(id: number): Promise<void> {
